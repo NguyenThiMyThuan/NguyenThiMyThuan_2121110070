@@ -1,77 +1,71 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeScreen from './home/HomeScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Text } from "react-native";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Splash from "./src/Screens/Splash";
+import Login from "./src/Screens/Login";
+import Signup from "./src/Screens/Signup";
+import Home from "./src/Screens/Home";
+import Details from "./src/Screens/Details";
+import Cart from "./src/Screens/Cart";
+import { Provider } from "react-redux";
+import { Store } from "./Redux/Store";
+import Orderplaced from "./src/Screens/Orderplaced";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { FontAwesome } from "@expo/vector-icons";
+// import BottomNavigator from "./src/navigation/BottomNavigator";
+import { TabNavigation } from "./TabNavigation";
 
-const Tab = createBottomTabNavigator();
-
-
-
-function FavoritesScreen() {
+const Stack = createNativeStackNavigator();
+const App = () => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Favorites!</Text>
-    </View>
-  );
-}
-
-function CartScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Cart!</Text>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
-
-
-export default function App() {
-  return (
-    
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Favorites') {
-              iconName = focused ? 'heart' : 'heart-outline';
-            } else if (route.name === 'Cart') {
-              iconName = focused ? 'cart' : 'cart-outline';
-            } else if (route.name === 'Profile') {
-              iconName = focused ? 'person' : 'person-outline';
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: 'blue',
-          inactiveTintColor: 'gray',
-          style: {
-            display: 'flex',
-          },
+    <Provider store={Store}>
+      <NavigationContainer>
+        {/* <Tab.Navigator 
+        initialRouteName="Slapsh"
+        screeeOptions={{
+        headerShown:false,  
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Favorites" component={FavoritesScreen} />
-        <Tab.Screen name="Cart" component={CartScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+       
+       <Stack.Screen name="bottom" component={BottomNavigator} options={{ headerShown: false }}/>
+        <Stack.Screen name="Slapsh" component={Splash} options={{ headerShown: false }}/>
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }}/>
+        <Tab.Screen name="Home" component={Home} options={{headerShown: false}}/>
+        <Stack.Screen name="Details" component={Details} options={{ headerShown: false }} />
+       <Stack.Screen name="Cart" component={Cart} options={{ headerShown: false }}/>
+       <Stack.Screen name="Orderplaced" component={Orderplaced} options={{ headerShown: false }}/>
+      </Tab.Navigator > */}
+        <Stack.Navigator>
+          <Stack.Screen name="Tab" component={TabNavigation} />
 
-      </Tab.Navigator>
-      
-    </NavigationContainer>
-    
+          <Stack.Screen
+            name="Slapsh"
+            component={Splash}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="Signup"
+            component={Signup}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Details"
+            component={Details}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Orderplaced"
+            component={Orderplaced}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+
+      </NavigationContainer>
+    </Provider>
   );
-}
+};
+
+export default App;
