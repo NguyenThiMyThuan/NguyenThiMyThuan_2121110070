@@ -44,7 +44,6 @@ const ProductsCarousel = ({ data }) => {
               <Text style={{ fontSize: 18, fontWeight: "600" }}>
                 {item.name}
               </Text>
-              <Text style={{ color: "gray" }}>quantity: {item.pieces}</Text>
 
               <View
                 style={{

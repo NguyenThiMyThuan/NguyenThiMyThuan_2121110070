@@ -74,26 +74,10 @@ const Details = ({ route }) => {
             color="black"
           />
         </View>
-        <Text style={{ fontSize: 16, color: "gray",marginBottom:4,marginTop:4 }}>Quantity, Price</Text>
         <Text style={{ fontSize: 20, color: "red", fontWeight: "bold" }}>
           {price} đ
         </Text>
         <DropBox />
-        {/* <View style={{
-            flexDirection:"row",
-            justifyContent: "space-between",
-            
-            
-          }}>
-          <Text style={{ paddingVertical: 13,}}>
-          product reviews   
-          </Text>
-          <AntDesign name="star" size={18} color="yellow" />
-          <AntDesign name="star" size={18} color="yellow" />
-          <AntDesign name="star" size={18} color="yellow" />
-          <AntDesign name="star" size={18} color="yellow" />
-          <AntDesign name="star" size={18} color="yellow" /> 
-          </View> */}
         <View style={{ flex: 0.85, marginTop: 110 }}>
           <TouchableOpacity
             onPress={() => {
@@ -108,9 +92,9 @@ const Details = ({ route }) => {
               alignItems: "center",
             }}
           >
-            <Text style={{ color: "white", fontSize: 18, fontWeight: "600" }}>
-              Mua ngay
-            </Text>
+            <Text style={{ color: "black", fontSize: 18, fontWeight: "600" }}>
+            Thêm giỏ hàng           
+             </Text>
           </TouchableOpacity>
         </View>
       </View>

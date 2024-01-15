@@ -149,7 +149,7 @@ const Cart = () => {
                       marginTop: 25,
                     }}
                   >
-                    {item.price * item.quantity} USD
+                    {item.price * item.quantity} 
                   </Text>
                 </View>
               </View>
@@ -170,8 +170,8 @@ const Cart = () => {
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "white", fontSize: 18, fontWeight: "700" }}>
-            Go To CheckOut
+          <Text style={{ color: "black", fontSize: 18, fontWeight: "700" }}>
+            Mua ngay
           </Text>
         </TouchableOpacity>
       </View>

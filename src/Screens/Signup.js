@@ -1,21 +1,62 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+} from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { myColors } from "../Utils/MyColor";
 import { StatusBar } from "expo-status-bar";
-import { TextInput } from "react-native-web";
+
 import { Iconicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
+import { authentication, database } from "../../Firebaseconfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import uuid from "react-native-uuid";
+import Login from "./Login";
+import Home from "./Home";
+
+
 
 const Signup = () => {
   const [isVisbile, setisVisbile] = useState(true);
   const [userCrendetials, setuserCrendetials] = useState({
+    name: "",
     email: "",
     password: "",
   });
-  const { email, password } = userCrendetials;
-  console.log(email);
+  const { email, password, name } = userCrendetials;
+  console.log(name);
+  const uid =uuid.v4;
+  const userAccount = () => {
+    createUserWithEmailAndPassword(authentication, email, password)
+      .then(() => {
+        nav.navigate('Login')
+        Alert.alert("User account created & signed in!");
+        setDoc(doc(database, "users", uid), {
+          username:name,
+          email:email,
+          id:authentication.currentUser.uid
+        });
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          Alert.alert("That email address is already in use!");
+        }
 
+        if (error.code === "auth/invalid-email") {
+          console.log("That email address is invalid!");
+        }
+
+        console.error(error);
+      });
+  };
   const nav = useNavigation();
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: myColors.secondary }}>
@@ -23,38 +64,36 @@ const Signup = () => {
       <ScrollView style={{ flex: 1 }}>
         <Image
           style={{
-            height: 80,
-            width: 80,
+            height: 70,
+            width: 70,
             alignSelf: "center",
-            paddingTop: 50,
-            marginTop: 50,
           }}
           source={require("../assets/logo.png")}
         />
 
-        <view style={{ paddingHorizontal: 20, marginTop: 30 }}>
+        <View style={{ paddingHorizontal: 20, marginTop: 0 }}>
           <Text
             style={{
-              color: myColors.third,
+              color: myColors.primary,
               fontSize: 35,
               fontWeight: "500",
-              marginLeft: 40,
+              marginLeft: 20,
             }}
           >
-            Sign Up{"\n"}
+            Đăng ký
           </Text>
 
           <Text
             style={{
               fontSize: 15,
-              fontWeight: "400",
+              fontWeight: "300",
               color: "grey",
               marginTop: 10,
               marginBot: 20,
-              marginLeft: 40,
+              marginLeft: 20,
             }}
           >
-            Enter your credentials to continue{"\n"}
+            {/* Enter your credentials to continue */}
           </Text>
           <Text
             style={{
@@ -62,23 +101,26 @@ const Signup = () => {
               fontWeight: "600",
               color: "grey",
               marginTop: 10,
-              marginLeft: 40,
+              marginLeft: 20,
             }}
           >
-            UseName{"\n"}
+            Họ tên{"\n"}
           </Text>
           <TextInput
             maxLength={10}
+value={name}
+            onChangeText={(val) => {
+              setuserCrendetials({ ...userCrendetials, name: val });
+            }}
             keyboardType="name-phone-pad"
             style={{
               borderColor: "#E3E3E3",
-              borderBottomWidth: 1,
-              marginTop: 15,
+              borderBottomWidth: 0.3,
+              marginTop: 10,
               fontSize: 16,
-              marginLeft: 40,
+              marginLeft: 20,
             }}
           />
-          <br />
 
           <Text
             style={{
@@ -86,13 +128,12 @@ const Signup = () => {
               fontWeight: "600",
               color: "grey",
               marginTop: 10,
-              marginLeft: 40,
+              marginLeft: 20,
             }}
           >
-            Email
+            Email hoặc số điện thoại
           </Text>
 
-          <br />
           <TextInput
             value={email}
             onChangeText={(val) => {
@@ -101,33 +142,31 @@ const Signup = () => {
             keyboardType="email-address"
             style={{
               borderColor: "#E3E3E3",
-              borderBottomWidth: 1,
-              marginTop: 15,
+              borderBottomWidth: 0.3,
+              marginTop: 20,
               fontSize: 16,
-              marginLeft: 40,
+              marginLeft: 20,
             }}
           />
-
-          <br />
 
           <Text
             style={{
               fontSize: 15,
               fontWeight: "600",
               color: "grey",
-              marginTop: 30,
-              marginLeft: 40,
+              marginTop: 20,
+              marginLeft: 20,
             }}
           >
-            PassWord
+            Mật khẩu
           </Text>
-          <br />
-
-          <view
+          <View
             style={{
               borderColor: "#E3E3E3",
+              borderBottomWidth: 0.3,
+              marginTop: 20,
+              marginLeft: 20,
               flexDirection: "row",
-              borderBottomWidth: 2,
               justifyContent: "space-between",
               alignItems: "center",
             }}
@@ -137,28 +176,31 @@ const Signup = () => {
               onChangeText={(val) => {
                 setuserCrendetials({ ...userCrendetials, password: val });
               }}
-              secureTextEntry={true}
-              maxLength={10}
+              secureTextEntry={isVisbile}
               keyboardType="ascii-capable"
               style={{
-                borderColor: "#E3E3E3",
-                borderBottomWidth: 1,
-                marginTop: 15,
                 fontSize: 16,
-                marginLeft: 40,
+
+                flex: 0.9,
               }}
             />
-            {/* <Iconicons name="eye-off-outline" size={24} color="black"/> */}
-            <br />
-          </view>
+            <Ionicons
+              onPress={() => {
+                setisVisbile(!isVisbile);
+              }}
+              name={isVisbile == true ? "eye-off-sharp" : "eye-sharp"}
+              size={22}
+              color="gray"
+            />
+          </View>
 
           <Text
             numberOfLines={2}
             style={{
-              marginLeft: 40,
-              marginRight: 40,
+              marginLeft: 20,
+
               fontSize: 15,
-              fontWeight: "400",
+              fontWeight: "300",
               color: "black",
               marginTop: 15,
               letterSpacting: 0.7,
@@ -167,24 +209,19 @@ const Signup = () => {
               opacity: 0.7,
             }}
           >
-            By continuing you agree to yuor Terms of Service
-            <br />
-            and Service and Privacy Policy
+            Vui lòng nhập mật khẩu có kí tự đặc biệt dài 6 chữ
           </Text>
           <TouchableOpacity
-            onPress={() => {
-              console.log("Press");
-            }}
+            onPress={userAccount}
             style={{
               backgroundColor: myColors.primary,
-              marginTop: 30,
+              marginTop: 20,
               height: 60,
               width: 300,
-              borderRadius: 20,
+borderRadius: 20,
               justifyContent: "center",
               alignItems: "center",
-              marginLeft: 40,
-              gap: 5,
+              marginLeft: 20,
             }}
           >
             <Text
@@ -194,7 +231,7 @@ const Signup = () => {
                 fontWeight: "500",
               }}
             >
-              Sign Up
+              Đăng ký
             </Text>
           </TouchableOpacity>
 
@@ -205,7 +242,9 @@ const Signup = () => {
               alignItems: "center",
             }}
           >
-            <Text style={{ fontSize: 16 }}>Already have an ac accountn ?</Text>
+            <Text style={{ fontSize: 16, marginTop: 10 }}>
+              Bạn đã có tài khoản chưa ?
+            </Text>
             <TouchableOpacity
               onPress={() => {
                 nav.navigate("Login");
@@ -218,11 +257,11 @@ const Signup = () => {
                   fontWeight: 600,
                 }}
               >
-                Login Now
+                Đăng nhập ngay
               </Text>
             </TouchableOpacity>
           </View>
-        </view>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
