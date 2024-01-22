@@ -38,7 +38,7 @@ const Cart = () => {
     >
      
       <Text style={{ textAlign: "center", fontSize: 23, fontWeight: "600" }}>
-        Gỏi hàng
+        Giỏ hàng
       </Text>
       <View>
         <FlatList
@@ -90,7 +90,7 @@ const Cart = () => {
                   <Text
                     style={{ fontSize: 20, fontWeight: "600", color: "gray" }}
                   >
-                    I{item.name}
+                    {item.name}
                   </Text>
                   <AntDesign
                     name="close"
@@ -101,9 +101,6 @@ const Cart = () => {
                     }}
                   />
                 </View>
-                <Text style={{ fontSize: 15, color: "gray", marginTop: 5 }}>
-                  Pieces:{item.pieces}, Price
-                </Text>
                 <View
                   style={{
                     alignContent: "center",
@@ -122,7 +119,7 @@ const Cart = () => {
                     <AntDesign
                       name="minus"
                       size={20}
-                      color={myColors.primary}
+                      color='orange'
                       onPress={() => {
                         dispatch(decrementQuantity(item));
                       }}
@@ -131,7 +128,7 @@ const Cart = () => {
                     <AntDesign
                       name="plus"
                       size={20}
-                      color={myColors.primary}
+                      color='orange'
                       onPress={() => {
                         if (item.quantity == 78) {
                         } else {
@@ -163,7 +160,7 @@ const Cart = () => {
             nav.navigate(Orderplaced);
           }}
           style={{
-            backgroundColor: myColors.primary,
+            backgroundColor: 'orange',
             borderRadius: 20,
             height: 60,
             justifyContent: "center",

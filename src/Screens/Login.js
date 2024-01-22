@@ -48,7 +48,7 @@ const Login = () => {
         <View style={{ paddingHorizontal: 20, marginTop: 0 }}>
           <Text
             style={{
-              color: myColors.primary,
+              color: 'black',
               fontSize: 35,
               fontWeight: "500",
               marginLeft: 20,
@@ -73,7 +73,7 @@ const Login = () => {
             style={{
               fontSize: 15,
               fontWeight: "600",
-              color: "black",
+              color: 'black',
               marginTop: 10,
               marginLeft: 20,
             }}
@@ -99,7 +99,7 @@ const Login = () => {
             style={{
               fontSize: 15,
               fontWeight: "600",
-              color: "black",
+              color: 'black',
               marginTop: 20,
               marginLeft: 20,
             }}
@@ -112,7 +112,7 @@ const Login = () => {
               borderBottomWidth: 0.3,
               marginTop: 20,
               marginLeft: 20,
-flexDirection: "row",
+              flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
             }}
@@ -147,7 +147,7 @@ flexDirection: "row",
 
               fontSize: 13,
               fontWeight: "400",
-              color: "black",
+              color: 'black',
               marginTop: 15,
               width: "95%",
               opacity: 0.5,
@@ -159,7 +159,7 @@ flexDirection: "row",
           <TouchableOpacity
             onPress={loginUser}
             style={{
-              backgroundColor: myColors.primary,
+              backgroundColor: 'orange',
               marginTop: 20,
               height: 60,
               width: 300,
@@ -173,7 +173,7 @@ flexDirection: "row",
             <Text
               style={{
                 fontSize: 19,
-                color: myColors.secondary,
+                color: 'black',
                 fontWeight: "500",
               }}
             >
@@ -206,7 +206,7 @@ flexDirection: "row",
               <Text
                 style={{
                   fontSize: 15,
-                  color: myColors.primary,
+                  color: 'black',
                   fontWeight: 600,
                   
 

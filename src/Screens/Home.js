@@ -15,11 +15,11 @@ const Home = () => {
       <HomeIcon />
       <HomeSearch/>
       <HomeBanner/>
-      <ProductsTile title="Áo hoodie"/>
+      <ProductsTile title="Hoodies"/>
       <ProductsCarousel data={fruits}/>
-      <ProductsTile title="Áo sweater"/>
+      <ProductsTile title="Sweaters"/>
       <ProductsCarousel data={vegetables}/>
-      <ProductsTile title="Áo thun"/>
+      <ProductsTile title="T-shirts"/>
       <ProductsCarousel data={orthers}/>
 
 

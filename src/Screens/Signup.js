@@ -74,7 +74,7 @@ const Signup = () => {
         <View style={{ paddingHorizontal: 20, marginTop: 0 }}>
           <Text
             style={{
-              color: myColors.primary,
+              color: 'black',
               fontSize: 35,
               fontWeight: "500",
               marginLeft: 20,
@@ -93,7 +93,6 @@ const Signup = () => {
               marginLeft: 20,
             }}
           >
-            {/* Enter your credentials to continue */}
           </Text>
           <Text
             style={{
@@ -108,7 +107,7 @@ const Signup = () => {
           </Text>
           <TextInput
             maxLength={10}
-value={name}
+            value={name}
             onChangeText={(val) => {
               setuserCrendetials({ ...userCrendetials, name: val });
             }}
@@ -214,11 +213,11 @@ value={name}
           <TouchableOpacity
             onPress={userAccount}
             style={{
-              backgroundColor: myColors.primary,
+              backgroundColor: 'orange',
               marginTop: 20,
               height: 60,
               width: 300,
-borderRadius: 20,
+              borderRadius: 20,
               justifyContent: "center",
               alignItems: "center",
               marginLeft: 20,
@@ -227,7 +226,7 @@ borderRadius: 20,
             <Text
               style={{
                 fontSize: 19,
-                color: myColors.secondary,
+                color: 'black',
                 fontWeight: "500",
               }}
             >
@@ -253,7 +252,7 @@ borderRadius: 20,
               <Text
                 style={{
                   fontSize: 15,
-                  color: myColors.primary,
+                  color: 'black',
                   fontWeight: 600,
                 }}
               >

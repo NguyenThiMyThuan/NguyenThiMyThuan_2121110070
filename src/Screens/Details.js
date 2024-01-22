@@ -85,7 +85,7 @@ const Details = ({ route }) => {
               nav.navigate("Cart");
             }}
             style={{
-              backgroundColor: myColors.primary,
+              backgroundColor: 'orange',
               borderRadius: 20,
               height: 60,
               justifyContent: "center",

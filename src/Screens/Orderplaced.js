@@ -20,8 +20,8 @@ const Orderplaced = () => {
         alignItems: "center",
       }}
     >
-      <MaterialIcons name="verified" size={60} color={myColors.primary} />
-      <Text>Congrats,Your order Places Successfully !</Text>
+      <MaterialIcons name="verified" size={60} color='orange' />
+      <Text>Đặt hàng thành công</Text>
     </View>
   );
 };

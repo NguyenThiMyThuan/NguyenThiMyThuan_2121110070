@@ -13,8 +13,8 @@ const ProductsTile = ({title}) => {
         alignItems: "center",
       }}
     >
-        <Text style={{ fontSize:20,color: "gray", fontWeight:"700"}} >{title} </Text>
-        <Text style={{ fontSize:16,color:myColors.primary,marginLeft: 140}}>Tất cả</Text>
+        <Text style={{ fontSize:20,color: "black", fontWeight:"700"}} >{title} </Text>
+        <Text style={{ fontSize:16,color:'orange',marginLeft: 140}}> Tất cả</Text>
     </View>
   );
 };
